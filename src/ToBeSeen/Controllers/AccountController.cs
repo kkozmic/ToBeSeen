@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using Castle.Core.Logging;
 using ToBeSeen.Models;
 
 namespace ToBeSeen.Controllers
@@ -34,32 +35,35 @@ namespace ToBeSeen.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public ActionResult LogOn(LogOnModel model, string returnUrl)
+		public ILogger Logger { get; set; }
+
+	[HttpPost]
+	public ActionResult LogOn(LogOnModel model, string returnUrl)
+	{
+		if (ModelState.IsValid)
 		{
-			if (ModelState.IsValid)
+			if (MembershipService.ValidateUser(model.UserName, model.Password))
 			{
-				if (MembershipService.ValidateUser(model.UserName, model.Password))
+				FormsService.SignIn(model.UserName, model.RememberMe);
+				if (Url.IsLocalUrl(returnUrl))
 				{
-					FormsService.SignIn(model.UserName, model.RememberMe);
-					if (Url.IsLocalUrl(returnUrl))
-					{
-						return Redirect(returnUrl);
-					}
-					else
-					{
-						return RedirectToAction("Index", "Home");
-					}
+					return Redirect(returnUrl);
 				}
 				else
 				{
-					ModelState.AddModelError("", "The user name or password provided is incorrect.");
+					return RedirectToAction("Index", "Home");
 				}
 			}
-
-			// If we got this far, something failed, redisplay form
-			return View(model);
+			else
+			{
+				Logger.WarnFormat("User {0} attempted login but password validation failed", model.UserName);
+				ModelState.AddModelError("", "The user name or password provided is incorrect.");
+			}
 		}
+
+		// If we got this far, something failed, redisplay form
+		return View(model);
+	}
 
 		// **************************************
 		// URL: /Account/LogOff
