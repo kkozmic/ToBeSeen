@@ -1,4 +1,3 @@
-using System;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -10,7 +9,7 @@ namespace ToBeSeen.Installers
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.AddFacility("logging", new LoggingFacility(LoggerImplementation.Log4net));
+			container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithAppConfig());
 		}
 	}
 }

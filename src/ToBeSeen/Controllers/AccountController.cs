@@ -12,6 +12,7 @@ using ToBeSeen.Models;
 
 namespace ToBeSeen.Controllers
 {
+	[HandleError]
 	public class AccountController : Controller
 	{
 
@@ -42,6 +43,8 @@ namespace ToBeSeen.Controllers
 	{
 		if (ModelState.IsValid)
 		{
+			Logger.InfoFormat("Trying to log-on User {0} into the system.", model.UserName);
+
 			if (MembershipService.ValidateUser(model.UserName, model.Password))
 			{
 				FormsService.SignIn(model.UserName, model.RememberMe);
