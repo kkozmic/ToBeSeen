@@ -11,7 +11,7 @@ namespace ToBeSeen
 
 	public class MvcApplication : System.Web.HttpApplication
 	{
-		private IWindsorContainer container;
+		private static IWindsorContainer container;
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
@@ -41,7 +41,7 @@ namespace ToBeSeen
 			BootstrapContainer();
 		}
 
-		private void BootstrapContainer()
+		private static void BootstrapContainer()
 		{
 			container = new WindsorContainer()
 				.Install(FromAssembly.This());
