@@ -59,14 +59,14 @@ namespace ToBeSeen.Plumbing
 			SchemaMetadataUpdater.QuoteTableAndColumns(config);
 		}
 
-		protected virtual void ShouldIgnoreProperty(IPropertyIgnorer property)
-		{
-			property.IgnoreProperties(p => p.MemberInfo.HasAttribute<DoNotMapAttribute>());
-		}
-
-		public virtual bool IsDomainEntity(Type t)
+		protected virtual bool IsDomainEntity(Type t)
 		{
 			return typeof(EntityBase).IsAssignableFrom(t);
+		}
+
+		private void ShouldIgnoreProperty(IPropertyIgnorer property)
+		{
+			property.IgnoreProperties(p => p.MemberInfo.HasAttribute<DoNotMapAttribute>());
 		}
 	}
 }

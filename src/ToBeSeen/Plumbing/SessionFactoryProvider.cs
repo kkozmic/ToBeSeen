@@ -19,16 +19,9 @@ namespace ToBeSeen.Plumbing
 			private set;
 		}
 
-		public virtual void Start()
+		public virtual void Initialize()
 		{
 			SessionFactory = config.BuildSessionFactory();
-		}
-
-		public virtual void Stop()
-		{
-			//Nothing to do, for now
-			//we're using IDisposable to
-			//clean up
 		}
 
 		public virtual void Dispose()

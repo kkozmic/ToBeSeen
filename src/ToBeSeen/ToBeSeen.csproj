@@ -110,6 +110,8 @@
     <Compile Include="Domain\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\favicon.ico" />
+    <Content Include="Content\favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
