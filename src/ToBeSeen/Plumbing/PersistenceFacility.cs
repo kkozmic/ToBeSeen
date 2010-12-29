@@ -22,7 +22,8 @@ namespace ToBeSeen.Plumbing
 				Component.For<ISessionFactory>()
 					.UsingFactoryMethod(config.BuildSessionFactory),
 				Component.For<ISession>()
-					.UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession()));
+					.UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
+					.LifeStyle.PerWebRequest);
 		}
 
 		private Configuration BuildDatabaseConfiguration()
