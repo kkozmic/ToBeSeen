@@ -16,28 +16,27 @@ namespace ToBeSeen.Plumbing
 	{
 		protected override void Init()
 		{
-			var config = Fluently.Configure()
+			var config = BuildDatabaseConfiguration();
+
+			Kernel.Register(
+				Component.For<ISessionFactory>()
+					.UsingFactoryMethod(config.BuildSessionFactory),
+				Component.For<ISession>()
+					.UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession()));
+		}
+
+		private Configuration BuildDatabaseConfiguration()
+		{
+			return Fluently.Configure()
 				.Database(SetupDatabase)
 				.Mappings(m => m.AutoMappings.Add(CreateMappingModel()))
 				.ExposeConfiguration(ConfigurePersistence)
 				.BuildConfiguration();
-
-			Kernel.Register(Component.For<Configuration>()
-								.Instance(config));
-
-			Kernel.Register(Component.For<ISessionFactoryProvider>()
-								.ImplementedBy<SessionFactoryProvider>());
-
-			Kernel.Register(Component.For<ISessionFactory>()
-								.UsingFactoryMethod(() => Kernel.Resolve<ISessionFactoryProvider>().SessionFactory));
-
-			Kernel.Register(Component.For<ISession>()
-								.UsingFactoryMethod(() => Kernel.Resolve<ISessionFactoryProvider>().SessionFactory.OpenSession()));
 		}
 
 		protected virtual AutoPersistenceModel CreateMappingModel()
 		{
-			var m = AutoMap.Assembly(typeof(EntityBase).Assembly)
+			var m = AutoMap.Assembly(typeof (EntityBase).Assembly)
 				.Where(IsDomainEntity)
 				.OverrideAll(ShouldIgnoreProperty)
 				.IgnoreBase<EntityBase>();
@@ -48,10 +47,10 @@ namespace ToBeSeen.Plumbing
 		protected virtual IPersistenceConfigurer SetupDatabase()
 		{
 			return MsSqlConfiguration.MsSql2008
-									 .UseOuterJoin()
-									 .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
-									 .ConnectionString(x => x.FromConnectionStringWithKey("ApplicationServices"))
-									 .ShowSql();
+				.UseOuterJoin()
+				.ProxyFactoryFactory(typeof (ProxyFactoryFactory))
+				.ConnectionString(x => x.FromConnectionStringWithKey("ApplicationServices"))
+				.ShowSql();
 		}
 
 		protected virtual void ConfigurePersistence(Configuration config)
@@ -61,7 +60,7 @@ namespace ToBeSeen.Plumbing
 
 		protected virtual bool IsDomainEntity(Type t)
 		{
-			return typeof(EntityBase).IsAssignableFrom(t);
+			return typeof (EntityBase).IsAssignableFrom(t);
 		}
 
 		private void ShouldIgnoreProperty(IPropertyIgnorer property)
