@@ -9,21 +9,30 @@
   <RecentFiles>
     <RecentFiles>
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:ControllersInstaller.cs" caret="457" fromTop="14" />
+<<<<<<< Updated upstream
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:DoNotMapAttribute.cs" caret="168" fromTop="7" />
+=======
+>>>>>>> Stashed changes
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Domain/f:Events.cs" caret="502" fromTop="21" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/f:_ViewStart.cshtml" caret="0" fromTop="0" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Home/f:About.cshtml" caret="0" fromTop="0" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Shared/f:_LogOnPartial.cshtml" caret="0" fromTop="0" />
+<<<<<<< Updated upstream
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/f:Global.asax.cs" caret="1183" fromTop="16" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Controllers/f:AccountController.cs" caret="1124" fromTop="10" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Models/f:AccountModels.cs" caret="3176" fromTop="10" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/f:Web.config" caret="1116" fromTop="2" />
+=======
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Controllers/f:AccountController.cs" caret="1124" fromTop="10" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Models/f:AccountModels.cs" caret="3176" fromTop="10" />
+>>>>>>> Stashed changes
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:LoggerInstaller.cs" caret="238" fromTop="8" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Home/f:Index.cshtml" caret="93" fromTop="5" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:PersistenceInstaller.cs" caret="380" fromTop="14" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:WindsorControllerFactory.cs" caret="637" fromTop="10" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Shared/f:_Layout.cshtml" caret="806" fromTop="14" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Controllers/f:HomeController.cs" caret="207" fromTop="9" />
+<<<<<<< Updated upstream
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="565" fromTop="0" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Domain/f:EntityBase.cs" caret="186" fromTop="8" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:SessionFactoryProvider.cs" caret="556" fromTop="6" />
@@ -51,6 +60,20 @@
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:SessionFactoryProvider.cs" caret="890" fromTop="13" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:SessionFactoryProvider.cs" caret="555" fromTop="3" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:SessionFactoryProvider.cs" caret="555" fromTop="8" />
+=======
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Domain/f:EntityBase.cs" caret="186" fromTop="8" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/f:Global.asax.cs" caret="0" fromTop="0" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/f:Web.config" caret="206" fromTop="8" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:DoNotMapAttribute.cs" caret="137" fromTop="5" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="457" fromTop="17" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/f:Web.config" caret="631" fromTop="1" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:LoggerInstaller.cs" caret="427" fromTop="11" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="19" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="24" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="2021" fromTop="28" />
+>>>>>>> Stashed changes
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:PersistenceInstaller.cs" caret="0" fromTop="0" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Installers/f:PersistenceInstaller.cs" caret="380" fromTop="14" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Home/f:Index.cshtml" caret="93" fromTop="5" />
@@ -59,7 +82,18 @@
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Views/d:Shared/f:_Layout.cshtml" caret="806" fromTop="14" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Controllers/f:HomeController.cs" caret="433" fromTop="9" />
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Controllers/f:HomeController.cs" caret="247" fromTop="13" />
+<<<<<<< Updated upstream
       <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:SessionFactoryProvider.cs" caret="556" fromTop="30" />
+=======
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="20" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="27" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="73" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="73" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="19" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="74" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="24" />
+      <File id="E2DBF26A-3ACC-483E-88AC-8468FA4BDA0A/d:Plumbing/f:PersistenceFacility.cs" caret="1955" fromTop="70" />
+>>>>>>> Stashed changes
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -104,7 +138,11 @@
       <Item value="true" priority="1" />
       <Item value="SessionFactory" priority="2" />
       <Item value="ctor" priority="0" />
+<<<<<<< Updated upstream
       <Item value="config" priority="3" />
+=======
+      <Item value="config" priority="4" />
+>>>>>>> Stashed changes
       <Item value="typeof" priority="0" />
       <Item value="EntityBase`0" priority="0" />
       <Item value="Antlr" priority="0" />
@@ -190,7 +228,11 @@
       <Item value="config" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:NHibernate.Cfg.Configuration">
+<<<<<<< Updated upstream
       <Item value="BuildSessionFactory`0" priority="0" />
+=======
+      <Item value="BuildSessionFactory`0" priority="1" />
+>>>>>>> Stashed changes
     </ItemStatistics>
     <ItemStatistics item="Qualified:ToBeSeen.Plumbing.ISessionFactoryProvider">
       <Item value="SessionFactory" priority="1" />
