@@ -21,7 +21,15 @@ namespace ToBeSeen.Plumbing
 		public override IController CreateController(RequestContext requestContext, string controllerName)
 		{
 			var controllerComponentName = controllerName + "controller";
-			return kernel.Resolve<IController>(controllerComponentName);
+
+			//Provided controllerName could be things such as "favicon.ico" 
+			//so checking availability of the component name before resolve
+			if(kernel.HasComponent(controllerComponentName))
+			{
+				return kernel.Resolve<IController>(controllerComponentName);
+			}
+
+			throw new ComponentNotFoundException(controllerComponentName);
 		}
 	}
 }
