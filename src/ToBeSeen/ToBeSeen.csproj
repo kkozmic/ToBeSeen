@@ -48,6 +48,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\lib\Windsor\dotNet40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\..\lib\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\lib\NHiberante\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -100,20 +103,26 @@
     <Compile Include="Installers\ControllersInstaller.cs" />
     <Compile Include="Installers\LoggerInstaller.cs" />
     <Compile Include="Installers\PersistenceInstaller.cs" />
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Installers\ServiceInstaller.cs" />
+    <Compile Include="Plumbing\AppIdentity.cs" />
     <Compile Include="Plumbing\DoNotMapAttribute.cs" />
     <Compile Include="Plumbing\PersistenceFacility.cs" />
     <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\UserInfo.cs" />
+    <Compile Include="Services\FormsAuthenticationService.cs" />
+    <Compile Include="Services\IFormsAuthenticationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\favicon.png" />
+    <Content Include="Content\Images\openid-inputicon.gif" />
+    <Content Include="Content\Images\openid-providers-en.png" />
+    <Content Include="Content\openid.css" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Scripts\openid-jquery-en.js" />
+    <Content Include="Scripts\openid-jquery.js" />
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -151,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain\Persistence.cd" />
@@ -171,8 +181,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53836</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>55888</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

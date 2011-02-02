@@ -1,158 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.Security;
+﻿using System.Web.Mvc;
 using Castle.Core.Logging;
-using ToBeSeen.Models;
+using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
+using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
+using DotNetOpenAuth.OpenId.RelyingParty;
+using ToBeSeen.Services;
+using DotNetOpenAuth.Messaging;
 
 namespace ToBeSeen.Controllers
 {
 	[HandleError]
 	public class AccountController : Controller
 	{
+		public virtual IFormsAuthenticationService FormsService { get; set; }
 
-		public IFormsAuthenticationService FormsService { get; set; }
-		public IMembershipService MembershipService { get; set; }
-
-		protected override void Initialize(RequestContext requestContext)
-		{
-			if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-			if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-
-			base.Initialize(requestContext);
-		}
-
-		// **************************************
-		// URL: /Account/LogOn
-		// **************************************
-
-		public ActionResult LogOn()
+		public virtual ILogger Logger { get; set; }
+		
+		public virtual ActionResult LogOn()
 		{
 			return View();
 		}
 
-		public ILogger Logger { get; set; }
-
-	[HttpPost]
-	public ActionResult LogOn(LogOnModel model, string returnUrl)
-	{
-		if (ModelState.IsValid)
+		public virtual ActionResult Authenticate(string openid_provider)
 		{
-			Logger.InfoFormat("Trying to log-on User {0} into the system.", model.UserName);
+			var openid = new OpenIdRelyingParty();
+			var response = openid.GetResponse();
 
-			if (MembershipService.ValidateUser(model.UserName, model.Password))
+			Logger.InfoFormat("Trying to log-on user using OpenId Identifier: {0} .", openid_provider);
+
+			if (response == null)
 			{
-				FormsService.SignIn(model.UserName, model.RememberMe);
-				if (Url.IsLocalUrl(returnUrl))
+				var request = openid.CreateRequest(openid_provider);
+
+				var claim = new ClaimsRequest
 				{
-					return Redirect(returnUrl);
-				}
-				else
-				{
-					return RedirectToAction("Index", "Home");
-				}
+					Email = DemandLevel.Require,
+					Nickname = DemandLevel.Require,
+					FullName = DemandLevel.Request,
+				};
+
+				var fetch = new FetchRequest();
+				fetch.Attributes.AddRequired(WellKnownAttributes.Name.First);
+				fetch.Attributes.AddRequired(WellKnownAttributes.Name.Last);
+
+				request.AddExtension(claim);
+				request.AddExtension(fetch);
+
+				return request.RedirectingResponse.AsActionResult();
 			}
-			else
+			
+			if (response.Status == AuthenticationStatus.Authenticated)
 			{
-				Logger.WarnFormat("User {0} attempted login but password validation failed", model.UserName);
-				ModelState.AddModelError("", "The user name or password provided is incorrect.");
+				var claim = response.GetExtension<ClaimsResponse>();
+				var fetch = response.GetExtension<FetchResponse>();
+				var nick = response.FriendlyIdentifierForDisplay;
+				var email = string.Empty;
+
+				if (claim != null)
+				{
+					nick = string.IsNullOrEmpty(claim.Nickname) ? claim.FullName : claim.Nickname;
+					email = claim.Email;
+				}
+
+				if (string.IsNullOrEmpty(nick) && fetch != null && 
+					fetch.Attributes.Contains(WellKnownAttributes.Name.First) && 
+					fetch.Attributes.Contains(WellKnownAttributes.Name.Last))
+				{
+					nick = fetch.GetAttributeValue(WellKnownAttributes.Name.First) + " " +
+						   fetch.GetAttributeValue(WellKnownAttributes.Name.Last);
+				}
+
+				var user = string.Format("{0} <{1}>", nick, email);
+
+				FormsService.SignIn(user);
+
+				Logger.InfoFormat("User {0} authenticated successfully.", user);
+
+				return RedirectToAction("Index", "Home");
 			}
+
+			Logger.Warn("User attempted login but password validation failed.");
+			ModelState.AddModelError("", "Authentication failed.");
+
+			return View("LogOn");
 		}
 
-		// If we got this far, something failed, redisplay form
-		return View(model);
-	}
-
-		// **************************************
-		// URL: /Account/LogOff
-		// **************************************
-
-		public ActionResult LogOff()
+		public virtual ActionResult LogOff()
 		{
 			FormsService.SignOut();
 
 			return RedirectToAction("Index", "Home");
 		}
-
-		// **************************************
-		// URL: /Account/Register
-		// **************************************
-
-		public ActionResult Register()
-		{
-			ViewModel.PasswordLength = MembershipService.MinPasswordLength;
-			return View();
-		}
-
-		[HttpPost]
-		public ActionResult Register(RegisterModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				// Attempt to register the user
-				MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
-
-				if (createStatus == MembershipCreateStatus.Success)
-				{
-					FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-					return RedirectToAction("Index", "Home");
-				}
-				else
-				{
-					ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
-				}
-			}
-
-			// If we got this far, something failed, redisplay form
-			ViewModel.PasswordLength = MembershipService.MinPasswordLength;
-			return View(model);
-		}
-
-		// **************************************
-		// URL: /Account/ChangePassword
-		// **************************************
-
-		[Authorize]
-		public ActionResult ChangePassword()
-		{
-			ViewModel.PasswordLength = MembershipService.MinPasswordLength;
-			return View();
-		}
-
-		[Authorize]
-		[HttpPost]
-		public ActionResult ChangePassword(ChangePasswordModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
-				{
-					return RedirectToAction("ChangePasswordSuccess");
-				}
-				else
-				{
-					ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-				}
-			}
-
-			// If we got this far, something failed, redisplay form
-			ViewModel.PasswordLength = MembershipService.MinPasswordLength;
-			return View(model);
-		}
-
-		// **************************************
-		// URL: /Account/ChangePasswordSuccess
-		// **************************************
-
-		public ActionResult ChangePasswordSuccess()
-		{
-			return View();
-		}
-
 	}
 }
