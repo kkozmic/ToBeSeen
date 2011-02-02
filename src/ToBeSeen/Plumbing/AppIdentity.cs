@@ -15,7 +15,7 @@ namespace ToBeSeen.Plumbing
 
 		public AppIdentity(FormsAuthenticationTicket ticket)
 		{
-			if(ticket == null || ticket.Name == null)
+			if (ticket == null || ticket.Name == null)
 				throw new ArgumentNullException("ticket");
 
 			Email = ticket.Name.Substring(ticket.Name.IndexOf("<"));
@@ -23,6 +23,8 @@ namespace ToBeSeen.Plumbing
 		}
 
 		public string Email { get; private set; }
+
+		#region IIdentity Members
 
 		public bool IsAuthenticated { get; private set; }
 
@@ -33,10 +35,11 @@ namespace ToBeSeen.Plumbing
 			get { return "OpenID"; }
 		}
 
+		#endregion
+
 		public override string ToString()
 		{
 			return string.Format("{0} <{1}>", Name, Email);
 		}
-
 	}
 }

@@ -4,7 +4,7 @@ using Castle.MicroKernel;
 
 namespace ToBeSeen.Plumbing
 {
-	public class WindsorControllerFactory: DefaultControllerFactory
+	public class WindsorControllerFactory : DefaultControllerFactory
 	{
 		private readonly IKernel kernel;
 
@@ -24,7 +24,7 @@ namespace ToBeSeen.Plumbing
 
 			//Provided controllerName could be things such as "favicon.ico" 
 			//so checking availability of the component name before resolve
-			if(kernel.HasComponent(controllerComponentName))
+			if (kernel.HasComponent(controllerComponentName))
 			{
 				return kernel.Resolve<IController>(controllerComponentName);
 			}

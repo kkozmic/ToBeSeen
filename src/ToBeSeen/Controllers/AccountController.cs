@@ -14,7 +14,7 @@ namespace ToBeSeen.Controllers
 		public virtual IFormsAuthenticationService FormsService { get; set; }
 
 		public virtual ILogger Logger { get; set; }
-		
+
 		public virtual ActionResult LogOn()
 		{
 			return View();
@@ -32,11 +32,11 @@ namespace ToBeSeen.Controllers
 				var request = openid.CreateRequest(openid_provider);
 
 				var claim = new ClaimsRequest
-				{
-					Email = DemandLevel.Require,
-					Nickname = DemandLevel.Require,
-					FullName = DemandLevel.Request,
-				};
+				            	{
+				            		Email = DemandLevel.Require,
+				            		Nickname = DemandLevel.Require,
+				            		FullName = DemandLevel.Request,
+				            	};
 
 				var fetch = new FetchRequest();
 				fetch.Attributes.AddRequired(WellKnownAttributes.Name.First);
@@ -47,7 +47,7 @@ namespace ToBeSeen.Controllers
 
 				return request.RedirectingResponse.AsActionResult();
 			}
-			
+
 			if (response.Status == AuthenticationStatus.Authenticated)
 			{
 				var claim = response.GetExtension<ClaimsResponse>();
@@ -61,12 +61,12 @@ namespace ToBeSeen.Controllers
 					email = claim.Email;
 				}
 
-				if (string.IsNullOrEmpty(nick) && fetch != null && 
-					fetch.Attributes.Contains(WellKnownAttributes.Name.First) && 
-					fetch.Attributes.Contains(WellKnownAttributes.Name.Last))
+				if (string.IsNullOrEmpty(nick) && fetch != null &&
+				    fetch.Attributes.Contains(WellKnownAttributes.Name.First) &&
+				    fetch.Attributes.Contains(WellKnownAttributes.Name.Last))
 				{
 					nick = fetch.GetAttributeValue(WellKnownAttributes.Name.First) + " " +
-						   fetch.GetAttributeValue(WellKnownAttributes.Name.Last);
+					       fetch.GetAttributeValue(WellKnownAttributes.Name.Last);
 				}
 
 				var user = string.Format("{0} <{1}>", nick, email);
