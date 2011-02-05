@@ -4,6 +4,7 @@
 	using System.Linq;
 	using System.Web.Mvc;
 
+	using Castle.Core;
 	using Castle.Core.Internal;
 	using Castle.MicroKernel;
 	using Castle.Windsor;
@@ -47,6 +48,16 @@
 			var allControllers = GetPublicClassesFromApplicationAssembly(c => c.Is<IController>());
 			var registeredControllers = GetImplementationTypesFor(typeof(IController), containerWithControllers);
 			Assert.Equal(allControllers, registeredControllers);
+		}
+
+		[Fact]
+		public void All_controllers_are_transient()
+		{
+			var nonTransientControllers = GetHandlersFor(typeof(IController), containerWithControllers)
+				.Where(controller => controller.ComponentModel.LifestyleType != LifestyleType.Transient)
+				.ToArray();
+
+			Assert.Empty(nonTransientControllers);
 		}
 
 		[Fact]
