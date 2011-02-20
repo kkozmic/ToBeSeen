@@ -1,9 +1,12 @@
-using System.Web.Mvc;
-using System.Web.Routing;
-using Castle.MicroKernel;
-
 namespace ToBeSeen.Plumbing
 {
+	using System;
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+
+	using Castle.MicroKernel;
+
 	public class WindsorControllerFactory : DefaultControllerFactory
 	{
 		private readonly IKernel kernel;
@@ -18,18 +21,13 @@ namespace ToBeSeen.Plumbing
 			kernel.ReleaseComponent(controller);
 		}
 
-		public override IController CreateController(RequestContext requestContext, string controllerName)
+		protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
 		{
-			var controllerComponentName = controllerName + "controller";
-
-			//Provided controllerName could be things such as "favicon.ico" 
-			//so checking availability of the component name before resolve
-			if (kernel.HasComponent(controllerComponentName))
+			if (controllerType == null)
 			{
-				return kernel.Resolve<IController>(controllerComponentName);
+				throw new HttpException(404, string.Format("The controller for path '{0}' could not be found.", requestContext.HttpContext.Request.Path));
 			}
-
-			throw new ComponentNotFoundException(controllerComponentName);
+			return (IController)kernel.Resolve(controllerType);
 		}
 	}
 }

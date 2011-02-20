@@ -16,8 +16,7 @@ namespace ToBeSeen.Installers
 			                   	.BasedOn<IController>()
 			                   	.If(Component.IsInSameNamespaceAs<HomeController>())
 			                   	.If(t => t.Name.EndsWith("Controller"))
-			                   	.Configure((c => c.Named(c.ServiceType.Name)
-			                   	                 	.LifeStyle.Transient)));
+			                   	.Configure((c => c.LifeStyle.Transient)));
 		}
 
 		#endregion

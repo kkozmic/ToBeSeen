@@ -41,16 +41,6 @@
 		}
 
 		[Fact]
-		public void All_controllers_are_named_after_their_type()
-		{
-			var controllersWithWrongName = GetHandlersFor(typeof(IController), containerWithControllers)
-				.Where(controller => controller.ComponentModel.Name != controller.ComponentModel.Implementation.Name)
-				.ToArray();
-
-			Assert.Empty(controllersWithWrongName);
-		}
-
-		[Fact]
 		public void All_controllers_are_registered()
 		{
 			// Is<TType> is an helper, extension method from Windsor
