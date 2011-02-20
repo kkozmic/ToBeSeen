@@ -31,11 +31,17 @@ namespace ToBeSeen
 
 		protected void Application_End()
 		{
+#if DEBUG
+			HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Stop();
+#endif
 			container.Dispose();
 		}
 
 		protected void Application_Start()
 		{
+#if DEBUG
+			HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+#endif
 			AreaRegistration.RegisterAllAreas();
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);

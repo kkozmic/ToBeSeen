@@ -54,6 +54,9 @@
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\lib\NHiberante\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0">
+      <HintPath>..\..\lib\NHProf\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\lib\NHiberante\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -94,7 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Installers\RepositoriesInstaller.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Domain\Events.cs" />
     <Compile Include="Domain\EntityBase.cs" />
     <Compile Include="Global.asax.cs">
@@ -110,6 +117,7 @@
     <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\UserInfo.cs" />
+    <Compile Include="Plumbing\Page.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\IFormsAuthenticationService.cs" />
   </ItemGroup>
@@ -161,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain\Persistence.cd" />
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
