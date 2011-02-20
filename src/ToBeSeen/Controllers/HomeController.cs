@@ -14,8 +14,8 @@ namespace ToBeSeen.Controllers
 
 		public ActionResult Index()
 		{
-			ViewModel.Message = "Welcome to ToBeSeen WebSite!";
-			ViewModel.EventCount = session.QueryOver<Event>().RowCount();
+			ViewBag.Message = "Welcome to ToBeSeen WebSite!";
+			ViewBag.EventCount = session.QueryOver<Event>().RowCount();
 
 			return View();
 		}
