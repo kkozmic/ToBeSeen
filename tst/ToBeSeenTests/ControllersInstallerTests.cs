@@ -64,7 +64,7 @@
 		public void All_controllers_expose_themselves_as_service()
 		{
 			var controllersWithWrongName = GetHandlersFor(typeof(IController), containerWithControllers)
-				.Where(controller => controller.Service != controller.ComponentModel.Implementation)
+				.Where(controller => controller.ComponentModel.Services.Single() != controller.ComponentModel.Implementation)
 				.ToArray();
 
 			Assert.Empty(controllersWithWrongName);
