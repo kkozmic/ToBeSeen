@@ -1,9 +1,9 @@
+using NHibernate;
+
+using ToBeSeen.Plumbing;
+
 namespace ToBeSeen.Repositories
 {
-	using NHibernate;
-
-	using ToBeSeen.Plumbing;
-
 	public class EventRepository : IEventRepository
 	{
 		private readonly int pageSize;
@@ -18,7 +18,7 @@ namespace ToBeSeen.Repositories
 
 		public Page<Event> GetPage(int pageNumber)
 		{
-			var firstResult = pageSize * (pageNumber - 1);
+			var firstResult = pageSize*(pageNumber - 1);
 			using (var tx = session.BeginTransaction())
 			{
 				var totalCount = session.QueryOver<Event>().ToRowCountQuery().FutureValue<int>();

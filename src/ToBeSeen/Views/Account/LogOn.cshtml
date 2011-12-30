@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Log On";
+	ViewBag.Title = "Log On";
 }
 
 <h2>Log On</h2>
@@ -8,18 +8,18 @@
 
 @using (Html.BeginForm("Authenticate", "Account", FormMethod.Post, new { id = "openid_form" }))
 {
-    <div>
-        <fieldset>
-            <legend>OpenID Provider</legend>
+	<div>
+		<fieldset>
+			<legend>OpenID Provider</legend>
 
-    		<div id="openid_choice">
-	    		<p>Please click your account provider:</p>
-	    		<div id="openid_btns"></div>
+			<div id="openid_choice">
+				<p>Please click your account provider:</p>
+				<div id="openid_btns"></div>
 			</div>
 			<div id="openid_input_area">
 				<input id="openid_provider" name="openid_provider" value="http://"/>
 				<input id="openid_submit" type="submit" value="Sign-In"/>
 			</div>
-        </fieldset>
-    </div>
+		</fieldset>
+	</div>
 }

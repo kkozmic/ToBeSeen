@@ -3,53 +3,54 @@
 @model Page<ToBeSeen.Event>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
 <table>
-    <tr>
-        <th></th>
-        <th>
-            Title
-        </th>
-        <th>
-            Where
-        </th>
-        <th>
-            When
-        </th>
-        <th>
-            Description
-        </th>
-    </tr>
+	<tr>
+		<th></th>
+		<th>
+			Title
+		</th>
+		<th>
+			Where
+		</th>
+		<th>
+			When
+		</th>
+		<th>
+			Description
+		</th>
+	</tr>
 
-@foreach (var item in Model.Items) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-        <td>
-            @item.Title
-        </td>
-        <td>
-            @item.Where
-        </td>
-        <td>
-            @String.Format("{0:g}", item.When)
-        </td>
-        <td>
-            @item.Description
-        </td>
-    </tr>
-}
+	@foreach (var item in Model.Items)
+	{
+		<tr>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+			</td>
+			<td>
+				@item.Title
+			</td>
+			<td>
+				@item.Where
+			</td>
+			<td>
+				@String.Format("{0:g}", item.When)
+			</td>
+			<td>
+				@item.Description
+			</td>
+		</tr>
+	}
 
 </table>
 

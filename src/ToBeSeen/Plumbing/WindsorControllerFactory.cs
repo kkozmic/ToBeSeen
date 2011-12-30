@@ -1,12 +1,12 @@
+using System;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+using Castle.MicroKernel;
+
 namespace ToBeSeen.Plumbing
 {
-	using System;
-	using System.Web;
-	using System.Web.Mvc;
-	using System.Web.Routing;
-
-	using Castle.MicroKernel;
-
 	public class WindsorControllerFactory : DefaultControllerFactory
 	{
 		private readonly IKernel kernel;

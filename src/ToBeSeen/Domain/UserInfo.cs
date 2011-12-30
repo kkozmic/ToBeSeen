@@ -1,16 +1,18 @@
-﻿namespace ToBeSeen
+﻿using System;
+
+namespace ToBeSeen
 {
 	public class UserInfo : EntityBase
 	{
-		public virtual int Username
+		public virtual int Email
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 			set { }
 		}
 
-		public virtual int Email
+		public virtual int Username
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 			set { }
 		}
 	}

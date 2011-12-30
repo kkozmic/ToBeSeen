@@ -16,7 +16,9 @@ namespace ToBeSeen.Plumbing
 		public AppIdentity(FormsAuthenticationTicket ticket)
 		{
 			if (ticket == null || ticket.Name == null)
+			{
 				throw new ArgumentNullException("ticket");
+			}
 
 			Email = ticket.Name.Substring(ticket.Name.IndexOf("<"));
 			Name = ticket.Name.Remove(ticket.Name.IndexOf("<") - 1, Email.Length + 1);
@@ -24,18 +26,14 @@ namespace ToBeSeen.Plumbing
 
 		public string Email { get; private set; }
 
-		#region IIdentity Members
-
-		public bool IsAuthenticated { get; private set; }
-
-		public string Name { get; private set; }
-
 		public string AuthenticationType
 		{
 			get { return "OpenID"; }
 		}
 
-		#endregion
+		public bool IsAuthenticated { get; private set; }
+
+		public string Name { get; private set; }
 
 		public override string ToString()
 		{

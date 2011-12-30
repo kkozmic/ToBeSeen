@@ -1,19 +1,19 @@
-﻿namespace ToBeSeenTests
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+
+using Castle.Core;
+using Castle.Core.Internal;
+using Castle.MicroKernel;
+using Castle.Windsor;
+
+using ToBeSeen.Controllers;
+using ToBeSeen.Installers;
+
+using Xunit;
+
+namespace ToBeSeenTests
 {
-	using System;
-	using System.Linq;
-	using System.Web.Mvc;
-
-	using Castle.Core;
-	using Castle.Core.Internal;
-	using Castle.MicroKernel;
-	using Castle.Windsor;
-
-	using ToBeSeen.Controllers;
-	using ToBeSeen.Installers;
-
-	using Xunit;
-
 	public class ControllersInstallerTests
 	{
 		private readonly IWindsorContainer containerWithControllers;

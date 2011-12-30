@@ -1,9 +1,9 @@
-﻿namespace ToBeSeen.Controllers
+﻿using System.Web.Mvc;
+
+using ToBeSeen.Repositories;
+
+namespace ToBeSeen.Controllers
 {
-	using System.Web.Mvc;
-
-	using ToBeSeen.Repositories;
-
 	public class EventsController : Controller
 	{
 		private readonly IEventRepository events;

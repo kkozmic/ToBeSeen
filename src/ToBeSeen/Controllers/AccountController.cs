@@ -1,10 +1,13 @@
 ﻿using System.Web.Mvc;
+
 using Castle.Core.Logging;
+
+using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.OpenId.RelyingParty;
+
 using ToBeSeen.Services;
-using DotNetOpenAuth.Messaging;
 
 namespace ToBeSeen.Controllers
 {
@@ -14,11 +17,6 @@ namespace ToBeSeen.Controllers
 		public virtual IFormsAuthenticationService FormsService { get; set; }
 
 		public virtual ILogger Logger { get; set; }
-
-		public virtual ActionResult LogOn()
-		{
-			return View();
-		}
 
 		public virtual ActionResult Authenticate(string openid_provider)
 		{
@@ -32,11 +30,11 @@ namespace ToBeSeen.Controllers
 				var request = openid.CreateRequest(openid_provider);
 
 				var claim = new ClaimsRequest
-				            	{
-				            		Email = DemandLevel.Require,
-				            		Nickname = DemandLevel.Require,
-				            		FullName = DemandLevel.Request,
-				            	};
+				{
+					Email = DemandLevel.Require,
+					Nickname = DemandLevel.Require,
+					FullName = DemandLevel.Request,
+				};
 
 				var fetch = new FetchRequest();
 				fetch.Attributes.AddRequired(WellKnownAttributes.Name.First);
@@ -89,6 +87,11 @@ namespace ToBeSeen.Controllers
 			FormsService.SignOut();
 
 			return RedirectToAction("Index", "Home");
+		}
+
+		public virtual ActionResult LogOn()
+		{
+			return View();
 		}
 	}
 }
